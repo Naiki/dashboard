@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#5eead4" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Dashboard" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x26a1;</text></svg>" />
+</head>
+<body>
+  <div id="app">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <button class="sidebar-toggle" id="sidebar-toggle" title="Sidebar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <span class="sidebar-logo" data-i18n="dashboard">Dashboard</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="sidebar-link active" data-view="news" href="#">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg>
+          <span class="sidebar-label" data-i18n="news">News</span>
+        </a>
+        <a class="sidebar-link" data-view="projects" href="#">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span class="sidebar-label" data-i18n="projects">Projekte</span>
+        </a>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="sidebar-link" id="btn-settings" title="Einstellungen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          <span class="sidebar-label" data-i18n="settings">Einstellungen</span>
+        </button>
+        <button class="sidebar-link" id="btn-theme" title="Theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <span class="sidebar-label" data-i18n="theme">Theme</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main" id="main">
+      <!-- News View -->
+      <div class="view active" id="view-news">
+        <header class="view-header">
+          <h1 data-i18n="news">News</h1>
+          <span class="news-count" id="news-count">0</span>
+          <div class="view-header-actions">
+            <button class="btn-icon-sm" id="btn-refresh-news" title="Refresh">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Time Filter Chips -->
+        <div class="filter-bar">
+          <button class="chip" data-hours="1">1h</button>
+          <button class="chip" data-hours="3">3h</button>
+          <button class="chip" data-hours="12">12h</button>
+          <button class="chip active" data-hours="24">24h</button>
+          <button class="chip" data-hours="48">48h</button>
+          <button class="chip" data-hours="72">72h</button>
+          <button class="chip" data-hours="168">1w</button>
+          <button class="chip" data-hours="720">1m</button>
+        </div>
+
+        <!-- Category Filter Chips -->
+        <div class="filter-bar category-bar" id="category-bar">
+          <button class="cat-chip active" data-category="all">Alle</button>
+          <button class="cat-chip" data-category="ai">AI</button>
+          <button class="cat-chip" data-category="dev">Dev</button>
+          <button class="cat-chip" data-category="tech">Tech</button>
+          <button class="cat-chip" data-category="market">Markt</button>
+          <button class="cat-chip" data-category="science">Science</button>
+        </div>
+
+        <!-- Source Filter Bar -->
+        <div class="source-bar" id="source-bar">
+          <!-- Rendered by JS -->
+        </div>
+
+        <!-- Loading Progress -->
+        <div class="news-loading" id="news-loading" style="display:none">
+          <div class="loading-bar"><div class="loading-bar-fill" id="loading-bar-fill"></div></div>
+          <span class="loading-text" id="loading-text"></span>
+        </div>
+
+        <!-- News Feed -->
+        <div class="feed" id="news-feed">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Projects View -->
+      <div class="view" id="view-projects">
+        <header class="view-header">
+          <h1 data-i18n="projects">Projekte</h1>
+          <span class="counter" id="project-count">0</span>
+        </header>
+        <div class="projects-list" id="projects-list">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Settings Modal -->
+    <div class="modal-backdrop" id="settings-backdrop"></div>
+    <div class="modal" id="settings-modal">
+      <div class="modal-header">
+        <h2 class="modal-title" data-i18n="settings">Einstellungen</h2>
+        <button class="btn-icon-sm" id="settings-close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="settings-body">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Slide-in Drawer -->
+    <div class="drawer-backdrop" id="drawer-backdrop"></div>
+    <aside class="drawer" id="drawer">
+      <div class="drawer-header">
+        <h2 class="drawer-title" id="drawer-title"></h2>
+        <button class="btn-icon-sm" id="drawer-close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="drawer-body" id="drawer-body"></div>
+    </aside>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
