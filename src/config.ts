@@ -37,4 +37,20 @@ export const projects: Project[] = [
       { label: 'Pipeline', url: 'scripts/pipeline.py' },
     ],
   },
+  {
+    id: 'remotion-video',
+    name: 'Video Studio',
+    description:
+      'Programmatische Videogenerierung mit Remotion + Claude Code. ' +
+      'React-Komponenten als Frames, natuerliche Sprache als Input.',
+    path: 'c:\\Users\\Sven\\Desktop\\my-video',
+    status: 'active',
+    color: '#f472b6',
+    icon: '\u{1F3A5}',
+    tags: ['Remotion', 'Video', 'React', 'AI'],
+    links: [
+      { label: 'Studio', url: 'npm run dev' },
+      { label: 'Render', url: 'npm run render' },
+    ],
+  },
 ];
