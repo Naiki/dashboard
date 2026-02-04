@@ -82,6 +82,20 @@ const strings: Record<Lang, Record<string, string>> = {
     'interest.market': 'Markt',
     'interest.science': 'Wissenschaft',
     'interest.general': 'Allgemein',
+
+    // Voice Studio
+    voice: 'Voice Studio',
+    'voice.title': 'Voice Studio',
+    'voice.desc': 'Nimm deine Sprachzeilen auf dem Handy auf. Der Server wandelt sie in Video-Voiceover um.',
+    'voice.connecting': 'Verbinde mit Voice Server...',
+    'voice.connected': 'Voice Server verbunden',
+    'voice.offline': 'Voice Server nicht erreichbar',
+    'voice.phoneTitle': 'Auf dem Handy aufnehmen',
+    'voice.phoneDesc': 'Scanne den QR-Code oder oeffne die URL auf deinem Smartphone (gleiches WLAN).',
+    'voice.openStudio': 'Voice Studio oeffnen',
+    'voice.progress': 'Aufnahme-Fortschritt',
+    'voice.offlineTitle': 'Server nicht gestartet',
+    'voice.offlineDesc': 'Starte den Voice Server im my-video Projekt:',
   },
   en: {
     dashboard: 'Dashboard',
@@ -153,6 +167,20 @@ const strings: Record<Lang, Record<string, string>> = {
     'interest.market': 'Market',
     'interest.science': 'Science',
     'interest.general': 'General',
+
+    // Voice Studio
+    voice: 'Voice Studio',
+    'voice.title': 'Voice Studio',
+    'voice.desc': 'Record your voice lines on your phone. The server converts them into video voiceover.',
+    'voice.connecting': 'Connecting to Voice Server...',
+    'voice.connected': 'Voice Server connected',
+    'voice.offline': 'Voice Server unreachable',
+    'voice.phoneTitle': 'Record on your phone',
+    'voice.phoneDesc': 'Scan the QR code or open the URL on your smartphone (same WiFi).',
+    'voice.openStudio': 'Open Voice Studio',
+    'voice.progress': 'Recording Progress',
+    'voice.offlineTitle': 'Server not started',
+    'voice.offlineDesc': 'Start the Voice Server in the my-video project:',
   },
 };
 

@@ -16,6 +16,7 @@ import {
 import { getSettings, saveSettings, applyTheme, renderSettingsPanel } from './modules/settings';
 import { t } from './modules/i18n';
 import { setLang } from './modules/i18n';
+import { renderVoice } from './modules/voice';
 import type { Project, Category } from './types';
 
 // ── State ────────────────────────────────────────────────────
@@ -41,14 +42,26 @@ function init(): void {
   // Sidebar
   const sidebarCollapsed = localStorage.getItem('sidebar') === 'collapsed';
   const sidebar = document.getElementById('sidebar')!;
+  const sidebarBackdrop = document.getElementById('sidebar-backdrop');
   if (sidebarCollapsed) sidebar.classList.add('collapsed');
+
+  const closeSidebar = () => {
+    sidebar.classList.add('collapsed');
+    localStorage.setItem('sidebar', 'collapsed');
+    sidebarBackdrop?.classList.remove('open');
+  };
+
   document.getElementById('sidebar-toggle')?.addEventListener('click', () => {
     sidebar.classList.toggle('collapsed');
-    localStorage.setItem(
-      'sidebar',
-      sidebar.classList.contains('collapsed') ? 'collapsed' : 'expanded',
-    );
+    const isCollapsed = sidebar.classList.contains('collapsed');
+    localStorage.setItem('sidebar', isCollapsed ? 'collapsed' : 'expanded');
+    if (!isCollapsed) {
+      sidebarBackdrop?.classList.add('open');
+    } else {
+      sidebarBackdrop?.classList.remove('open');
+    }
   });
+  sidebarBackdrop?.addEventListener('click', closeSidebar);
 
   // Navigation
   document.querySelectorAll('.sidebar-link[data-view]').forEach((link) => {
@@ -56,6 +69,8 @@ function init(): void {
       e.preventDefault();
       const view = (link as HTMLElement).dataset.view!;
       switchView(view);
+      // Close sidebar on mobile after navigation
+      if (window.innerWidth <= 768) closeSidebar();
     });
   });
 
@@ -185,6 +200,12 @@ function switchView(viewId: string): void {
 
   document.getElementById(`view-${viewId}`)?.classList.add('active');
   document.querySelector(`.sidebar-link[data-view="${viewId}"]`)?.classList.add('active');
+
+  // Load voice studio when switching to voice view
+  if (viewId === 'voice') {
+    const voiceContent = document.getElementById('voice-content');
+    if (voiceContent) renderVoice(voiceContent);
+  }
 }
 
 // ── Theme Cycling ────────────────────────────────────────────
@@ -255,6 +276,9 @@ function updateNewsCount(): void {
 
 // ── Settings ─────────────────────────────────────────────────
 function openSettings(): void {
+  // Close drawer first if open
+  closeDrawer();
+
   const modal = document.getElementById('settings-modal')!;
   const backdrop = document.getElementById('settings-backdrop')!;
   const body = document.getElementById('settings-body')!;
@@ -278,6 +302,9 @@ function closeSettings(): void {
 
 // ── Drawer ───────────────────────────────────────────────────
 function openProjectDrawer(project: Project): void {
+  // Close settings first if open
+  closeSettings();
+
   const drawer = document.getElementById('drawer')!;
   const backdrop = document.getElementById('drawer-backdrop')!;
   const title = document.getElementById('drawer-title')!;
