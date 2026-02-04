@@ -1,0 +1,22 @@
+{
+  "name": "Sven Dashboard",
+  "short_name": "Dashboard",
+  "description": "News Hub & Projekt-Dashboard",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0a0a0d",
+  "theme_color": "#5eead4",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
